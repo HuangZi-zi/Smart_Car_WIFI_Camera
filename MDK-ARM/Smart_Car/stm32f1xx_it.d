@@ -30,3 +30,4 @@ smart_car\stm32f1xx_it.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_
 smart_car\stm32f1xx_it.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 smart_car\stm32f1xx_it.o: ../Inc/stm32f1xx_it.h
 smart_car\stm32f1xx_it.o: ../Inc/tim.h
+smart_car\stm32f1xx_it.o: ../Inc/usart.h

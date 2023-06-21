@@ -22,6 +22,10 @@
 
 /* USER CODE BEGIN 0 */
 #include "stdio.h"
+
+__align(8) uint8_t USART2_TX_BUF[USART2_MAX_SEND_LEN]; 	//发送缓冲,最大USART2_MAX_SEND_LEN字节
+uint8_t USART2_RX_BUF[USART2_MAX_RECV_LEN]; 						//接收缓冲,最大USART2_MAX_RECV_LEN个字节
+uint16_t USART2_RX_STA=0;																//接收数据状态
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart1;
@@ -199,12 +203,15 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 } 
 
 /* USER CODE BEGIN 1 */
+
 //重定义fputc函数 
 int fputc(int ch, FILE *f)
 {      
 	HAL_UART_Transmit(&huart1,(uint8_t *)&ch, 1, 0xffff);
 	return ch;
 }
+
+
 /* USER CODE END 1 */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
