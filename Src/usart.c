@@ -23,9 +23,10 @@
 /* USER CODE BEGIN 0 */
 #include "stdio.h"
 
-__align(8) uint8_t USART2_TX_BUF[USART2_MAX_SEND_LEN]; 	//发送缓冲,最大USART2_MAX_SEND_LEN字节
-uint8_t USART2_RX_BUF[USART2_MAX_RECV_LEN]; 						//接收缓冲,最大USART2_MAX_RECV_LEN个字节
-uint16_t USART2_RX_STA=0;																//接收数据状态
+
+uint8_t USART2_RX_BUFF; 																	//接收缓存
+uint8_t USART2_RX[USART2_MAX_RECV_LEN];										//接收储存
+uint16_t USART2_RX_STA=0;																	//接收数据计数
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart1;

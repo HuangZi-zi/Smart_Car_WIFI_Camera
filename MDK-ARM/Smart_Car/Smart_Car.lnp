@@ -6,6 +6,7 @@
 "smart_car\ir_tracing.o"
 "smart_car\ultrasonicwave.o"
 "smart_car\servo.o"
+"smart_car\wifi_command.o"
 "smart_car\main.o"
 "smart_car\gpio.o"
 "smart_car\dma.o"

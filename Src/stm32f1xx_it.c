@@ -58,7 +58,6 @@ extern float UltrasonicWave_Distance;
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-extern TIM_HandleTypeDef htim2;
 extern DMA_HandleTypeDef hdma_usart2_tx;
 extern UART_HandleTypeDef huart1;
 extern UART_HandleTypeDef huart2;
@@ -208,7 +207,21 @@ void SysTick_Handler(void)
 void EXTI1_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI1_IRQn 0 */
-	
+	//传感器接收到回声后Ecoh输出高电平，高电平的持续时间就是从发出到接收的总时间
+	delay_us(10);		                      //延时10us
+  if(__HAL_GPIO_EXTI_GET_IT(Echo_Pin))
+	{
+			__HAL_TIM_SET_COUNTER(&htim2,0);
+			HAL_TIM_Base_Start(&htim2);//开启时钟                         
+			while(HAL_GPIO_ReadPin(Echo_GPIO_Port,Echo_Pin));//等待低电平
+			HAL_TIM_Base_Stop(&htim2);//关闭时钟 
+		//每一次计数为1us
+			UltrasonicWave_Distance=(float)__HAL_TIM_GET_COUNTER(&htim2)*17/1000.0;//计算距离，单位为cm
+	} 
+	if (UltrasonicWave_Distance<=8.0)
+	{
+	Error_Handler();
+	}
   /* USER CODE END EXTI1_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_1);
   /* USER CODE BEGIN EXTI1_IRQn 1 */
@@ -228,20 +241,6 @@ void DMA1_Channel7_IRQHandler(void)
   /* USER CODE BEGIN DMA1_Channel7_IRQn 1 */
 
   /* USER CODE END DMA1_Channel7_IRQn 1 */
-}
-
-/**
-  * @brief This function handles TIM2 global interrupt.
-  */
-void TIM2_IRQHandler(void)
-{
-  /* USER CODE BEGIN TIM2_IRQn 0 */
-
-  /* USER CODE END TIM2_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim2);
-  /* USER CODE BEGIN TIM2_IRQn 1 */
-
-  /* USER CODE END TIM2_IRQn 1 */
 }
 
 /**

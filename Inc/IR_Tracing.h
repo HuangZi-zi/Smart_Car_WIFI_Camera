@@ -6,9 +6,11 @@
 //#define Tracing_R_GPIO_Port 	GPIOA
 //#define Tracing_L_Pin 				GPIO_PIN_0
 //#define Tracing_L_GPIO_Port 	GPIOB
-
+//#define Tracing_M_Pin 				GPIO_PIN_6
+//#define Tracing_M_GPIO_Port		GPIOB
 #define READ_TRACING_R 	HAL_GPIO_ReadPin(Tracing_R_GPIO_Port,Tracing_R_Pin)
 #define READ_TRACING_L	HAL_GPIO_ReadPin(Tracing_L_GPIO_Port,Tracing_L_Pin)
+#define READ_TRACING_M	HAL_GPIO_ReadPin(Tracing_M_GPIO_Port,Tracing_M_Pin)
 
 #define BLACK_AREA 			1
 #define WHITE_AREA 			0
@@ -20,7 +22,7 @@
 #define COMM_LEFT  			'C'//×ó×ª
 #define COMM_RIGHT 			'D'//ÓÒ×ª
 
-void TracingRun(int speed);
+char TracingRun(void);
 
 #endif
 

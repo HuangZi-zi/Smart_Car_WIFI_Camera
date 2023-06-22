@@ -15,5 +15,12 @@
 
 
 void SetJointAngle(int ID, float angle);
+void pan_left(void);//左右舵机靠左
+void pan_right(void);//左右舵机靠右
+void pitch_up(void);//上下舵机上
+void pitch_down(void);//上下舵机下
+
+
+
 
 #endif

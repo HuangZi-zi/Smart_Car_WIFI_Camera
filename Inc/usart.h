@@ -44,9 +44,9 @@ void MX_USART1_UART_Init(void);
 void MX_USART2_UART_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-extern uint8_t  USART2_RX_BUF[USART2_MAX_RECV_LEN]; 		//接收缓冲,最大USART2_MAX_RECV_LEN字节
-extern uint8_t  USART2_TX_BUF[USART2_MAX_SEND_LEN]; 		//发送缓冲,最大USART2_MAX_SEND_LEN字节
-extern uint16_t USART2_RX_STA;   												//接收数据状态
+extern uint8_t USART2_RX_BUFF; 																	//接收缓存
+extern uint8_t USART2_RX[USART2_MAX_RECV_LEN];									//接收储存
+extern uint16_t USART2_RX_STA;																	//接收数据计数
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

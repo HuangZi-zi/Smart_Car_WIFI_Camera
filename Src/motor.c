@@ -1,6 +1,7 @@
 #include "motor.h"
 #include "main.h"
 #include "tim.h"
+#include "IR_Tracing.h"
 //#include "math.h"
 
 //严谨的PWM调速应当将PWM施加到使能端
@@ -127,4 +128,17 @@ void spin_right(signed char speed,int time) //右旋转函数
 		SetMotorSpeed(1,speed-100); //左轮正
 	  SetMotorSpeed(0,100-speed);//右轮负
 		HAL_Delay(time);                    //时间为毫秒  
+}
+
+void command_run(char ctrl_comm, int speed)
+{
+		switch(ctrl_comm)
+		{
+			case COMM_FORWARD:    forward(speed,10);break;
+			case COMM_BACK:  			back(speed,10);break;
+			case COMM_LEFT:  			turn_left(speed,10);break;
+			case COMM_RIGHT: 			turn_right(speed,10);break;
+			case COMM_BRAKE:  		brake(10);break;
+			default : 						break;
+		}
 }

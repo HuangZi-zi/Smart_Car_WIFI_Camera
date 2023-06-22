@@ -12,6 +12,7 @@ void turn_left(signed char speed,int time);
 void spin_left(signed char speed,int time);
 void turn_right(signed char speed,int time);
 void spin_right(signed char speed,int time);
+void command_run(char ctrl_comm, int speed);
 
 //IO接口定义
 // 左电机 方向：PB7 PWM: PB8
