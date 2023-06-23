@@ -6,8 +6,8 @@
 //#define Tracing_R_GPIO_Port 	GPIOA
 //#define Tracing_L_Pin 				GPIO_PIN_0
 //#define Tracing_L_GPIO_Port 	GPIOB
-//#define Tracing_M_Pin 				GPIO_PIN_6
-//#define Tracing_M_GPIO_Port		GPIOB
+//#define Tracing_M_Pin 				GPIO_PIN_8
+//#define Tracing_M_GPIO_Port 	GPIOA
 #define READ_TRACING_R 	HAL_GPIO_ReadPin(Tracing_R_GPIO_Port,Tracing_R_Pin)
 #define READ_TRACING_L	HAL_GPIO_ReadPin(Tracing_L_GPIO_Port,Tracing_L_Pin)
 #define READ_TRACING_M	HAL_GPIO_ReadPin(Tracing_M_GPIO_Port,Tracing_M_Pin)

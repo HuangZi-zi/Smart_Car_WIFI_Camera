@@ -122,18 +122,20 @@ int main(void)
   /* USER CODE BEGIN WHILE */
 	brake(50);
 	keyscan();
+	
 	printf("hello/n");
   while (1)
   {
-		SetJointAngle(Servo_Ultrasonic,90);
+		//SetJointAngle(Servo_Ultrasonic,90);
 		UltrasonicWave_StartMeasure();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-
+		//printf("%f\n",UltrasonicWave_Distance);
+		//HAL_Delay(500);
 		//command_run(TracingRun(),100);
 		
-		command_run(receive_command(),30);
+		//command_run(receive_command(),30);
 	}
   /* USER CODE END 3 */
 }
@@ -178,23 +180,23 @@ void SystemClock_Config(void)
 /* USER CODE BEGIN 4 */
 
 //GPIO中断服务程序，用于处理超声波避障
-//void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-//{
-//	//传感器接收到回声后Ecoh输出高电平，高电平的持续时间就是从发出到接收的总时间
-//  if(GPIO_Pin==Echo_Pin)
-//	{
-//			__HAL_TIM_SET_COUNTER(&htim2,0);
-//			HAL_TIM_Base_Start(&htim2);//开启时钟                         
-//			while(HAL_GPIO_ReadPin(Echo_GPIO_Port,Echo_Pin));//等待低电平
-//			HAL_TIM_Base_Stop(&htim2);//关闭时钟 
-//		//每一次计数为1us
-//			UltrasonicWave_Distance=(float)__HAL_TIM_GET_COUNTER(&htim2)*17/1000.0;//计算距离，单位为cm
-//	} 
-//	if (UltrasonicWave_Distance<=8.0)
-//	{
-//	Error_Handler();
-//	}
-//}
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+	//传感器接收到回声后Ecoh输出高电平，高电平的持续时间就是从发出到接收的总时间
+  if(GPIO_Pin==Echo_Pin)
+	{
+			__HAL_TIM_SET_COUNTER(&htim2,0);
+			HAL_TIM_Base_Start(&htim2);//开启时钟                         
+			while(HAL_GPIO_ReadPin(Echo_GPIO_Port,Echo_Pin));//等待低电平
+			HAL_TIM_Base_Stop(&htim2);//关闭时钟 
+		//每一次计数为1us
+			UltrasonicWave_Distance=(float)__HAL_TIM_GET_COUNTER(&htim2)*17/1000.0;//计算距离，单位为cm
+	} 
+	if (UltrasonicWave_Distance<=8.0)
+	{
+	Error_Handler();
+	}
+}
 
 //串口2中断服务程序，用于处理串口2接收
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)

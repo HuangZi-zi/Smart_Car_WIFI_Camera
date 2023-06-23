@@ -79,8 +79,8 @@ void Error_Handler(void);
 #define Tracing_L_GPIO_Port GPIOB
 #define Servo_Pan_PWM_Pin GPIO_PIN_1
 #define Servo_Pan_PWM_GPIO_Port GPIOB
-#define Tracing_M_Pin GPIO_PIN_6
-#define Tracing_M_GPIO_Port GPIOB
+#define Tracing_M_Pin GPIO_PIN_8
+#define Tracing_M_GPIO_Port GPIOA
 #define Left_Motor_Pin GPIO_PIN_7
 #define Left_Motor_GPIO_Port GPIOB
 #define Left_Motor_PWM_Pin GPIO_PIN_8

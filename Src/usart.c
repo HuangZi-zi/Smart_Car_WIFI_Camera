@@ -58,7 +58,7 @@ void MX_USART2_UART_Init(void)
 {
 
   huart2.Instance = USART2;
-  huart2.Init.BaudRate = 9600;
+  huart2.Init.BaudRate = 115200;
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;
@@ -208,10 +208,17 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 //重定义fputc函数 
 int fputc(int ch, FILE *f)
 {      
-	HAL_UART_Transmit(&huart1,(uint8_t *)&ch, 1, 0xffff);
+	HAL_UART_Transmit(&huart2,(uint8_t *)&ch, 1, 0xffff);
 	return ch;
 }
 
+//重定义fgetc函数
+int fgetc(FILE *f)
+{
+	uint8_t ch=0;
+	HAL_UART_Receive(&huart2,&ch,1,0xffff);
+	return ch;
+}
 
 /* USER CODE END 1 */
 
