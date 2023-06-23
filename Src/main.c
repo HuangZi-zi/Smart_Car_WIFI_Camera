@@ -123,17 +123,18 @@ int main(void)
 	brake(50);
 	keyscan();
 	
-	printf("hello/n");
+	printf("hello\n");
   while (1)
   {
-		//SetJointAngle(Servo_Ultrasonic,90);
+		SetJointAngle(Servo_Ultrasonic,90);
 		UltrasonicWave_StartMeasure();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
 		//printf("%f\n",UltrasonicWave_Distance);
 		//HAL_Delay(500);
-		//command_run(TracingRun(),100);
+
+		command_run(TracingRun(),50);
 		
 		//command_run(receive_command(),30);
 	}
@@ -192,10 +193,10 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 		//每一次计数为1us
 			UltrasonicWave_Distance=(float)__HAL_TIM_GET_COUNTER(&htim2)*17/1000.0;//计算距离，单位为cm
 	} 
-	if (UltrasonicWave_Distance<=8.0)
-	{
-	Error_Handler();
-	}
+//	if (UltrasonicWave_Distance<=8.0)
+//	{
+//	Error_Handler();
+//	}
 }
 
 //串口2中断服务程序，用于处理串口2接收
@@ -206,10 +207,13 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 		USART2_RX[USART2_RX_STA++]=USART2_RX_BUFF;		//记录接收到的值
 		if(USART2_RX[USART2_RX_STA-1]== 0x0A)		//接收完毕
 		{
-			USART2_RX_STA|=1<<15;					//强制标记接收完成
+			USART2_RX_STA=0;
 		}			 
-		HAL_UART_Receive_IT(&huart1, (uint8_t *)&USART2_RX_BUFF, 1);   //再开启接收中断
+		//printf("%c!\n",USART2_RX_BUFF);
+		HAL_UART_Receive_IT(&huart2, (uint8_t *)&USART2_RX_BUFF, 1);   //再开启接收中断
 	}
+	
+	
 }
 /* USER CODE END 4 */
 
