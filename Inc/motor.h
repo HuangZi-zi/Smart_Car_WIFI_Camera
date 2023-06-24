@@ -2,6 +2,9 @@
 #define __MOTOR_H_
 
 #include "main.h"
+#include "tim.h"
+#include "IR_Tracing.h"
+#include "servo.h"
 
 //º¯ÊıÉùÃ÷
 void SetMotorSpeed(unsigned char ucChannel,signed char cSpeed);

@@ -126,17 +126,19 @@ int main(void)
 	printf("hello\n");
   while (1)
   {
+		int i;
 		SetJointAngle(Servo_Ultrasonic,90);
 		UltrasonicWave_StartMeasure();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
 		//printf("%f\n",UltrasonicWave_Distance);
 		//HAL_Delay(500);
 
-		command_run(TracingRun(),50);
-		
-		//command_run(receive_command(),30);
+		//command_run(TracingRun(),50);
+		//receive_command();
+		command_run(receive_command(),30);
 	}
   /* USER CODE END 3 */
 }
@@ -205,11 +207,11 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 	if(huart==&huart2)//接收到数据
 	{	  
 		USART2_RX[USART2_RX_STA++]=USART2_RX_BUFF;		//记录接收到的值
-		if(USART2_RX[USART2_RX_STA-1]== 0x0A)		//接收完毕
-		{
-			USART2_RX_STA=0;
-		}			 
-		//printf("%c!\n",USART2_RX_BUFF);
+//		if(USART2_RX[USART2_RX_STA-1]== 0x0A)		//接收完毕
+//		{
+//			USART2_RX_STA=0;
+//		}			 
+		//printf("%s!\n",USART2_RX);
 		HAL_UART_Receive_IT(&huart2, (uint8_t *)&USART2_RX_BUFF, 1);   //再开启接收中断
 	}
 	

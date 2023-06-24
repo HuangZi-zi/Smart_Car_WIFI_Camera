@@ -6,6 +6,7 @@
 #include "string.h"
 #include "IR_Tracing.h"
 #include "servo.h"
+#include "stdio.h"
 
 char receive_command(void);
 

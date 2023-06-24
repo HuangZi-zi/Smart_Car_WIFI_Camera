@@ -1,8 +1,4 @@
 #include "motor.h"
-#include "main.h"
-#include "tim.h"
-#include "IR_Tracing.h"
-//#include "math.h"
 
 //严谨的PWM调速应当将PWM施加到使能端
 //L298N的真值表如下：
@@ -139,6 +135,10 @@ void command_run(char ctrl_comm, int speed)
 			case COMM_LEFT:  			turn_left(speed,10);break;
 			case COMM_RIGHT: 			turn_right(speed,10);break;
 			case COMM_BRAKE:  		brake(10);break;
+			case 'L':							pan_left();break;
+			case 'R':							pan_right();break;
+			case 'J':							pitch_up();break;
+			case 'K':							pitch_down();break;
 			default : 						break;
 		}
 }

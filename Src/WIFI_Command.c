@@ -8,58 +8,62 @@
 
 char receive_command()
 {
+	char comm=COMM_BRAKE;
 	uint8_t reclen=0;
-	if(USART2_RX_STA&0X8000)	//接收到一次数据了
+	if(USART2_RX_STA!=0)	//接收到一次数据了
 		{
+
 			reclen=USART2_RX_STA&0X7FFF;	//得到数据长度
 			USART2_RX[reclen]=0;	 				//加入结束符
-		//	printf("USART2_RX_BUF:%s\n",USART2_RX_BUF);
-		//	printf("reclen:%d\n",reclen);
+			printf("%s!\n",USART2_RX);
+			printf("%d!\n",reclen);
 			if(reclen==3)
 			{	
 				//以下是控制云台舵机
 				if(strcmp((const char*)USART2_RX,"ONL")==0)//左
 				{
-					pan_left();
+					comm = 'L';
 				}
 				else if(strcmp((const char*)USART2_RX,"ONI")==0)//右
 				{
-          pan_right();
+          comm = 'R';
 				}
 				else if(strcmp((const char*)USART2_RX,"ONJ")==0)//上
 				{
-          pitch_up();
+          comm = 'J';
 				}
 				else if(strcmp((const char*)USART2_RX,"ONK")==0)//下
 				{
-          pitch_down();
+          comm = 'K';
 				}
 				//以下是控制电机
 				if(strcmp((const char*)USART2_RX,"ONA")==0)
 				{
-          return COMM_FORWARD;
+          comm = COMM_FORWARD;
 				}
 				else if(strcmp((const char*)USART2_RX,"ONB")==0)
 				{
-					return COMM_BACK;
+					comm = COMM_BACK;
 				}
 				else if(strcmp((const char*)USART2_RX,"ONC")==0)
 				{
-					return COMM_RIGHT;
+					comm = COMM_RIGHT;
 				}
 			  else if(strcmp((const char*)USART2_RX,"OND")==0)
 				{
-					return COMM_LEFT;
+					comm = COMM_LEFT;
 				}
 			  else if(strcmp((const char*)USART2_RX,"ONE")==0)
 				{
-					return COMM_BRAKE;
+					comm = COMM_BRAKE;
 				}
 				else if(strcmp((const char*)USART2_RX,"ONF")==0)
 				{
-					return COMM_BRAKE;
+					comm = COMM_BRAKE;
 				}
+				USART2_RX_STA=0;
 			}
-			USART2_RX_STA=0;		
+					
 		}	
+	return comm;	
 }

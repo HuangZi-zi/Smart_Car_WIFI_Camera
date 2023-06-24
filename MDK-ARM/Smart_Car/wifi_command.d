@@ -33,3 +33,4 @@ smart_car\wifi_command.o: ../Inc/usart.h
 smart_car\wifi_command.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 smart_car\wifi_command.o: ../Inc/IR_Tracing.h
 smart_car\wifi_command.o: ../Inc/servo.h
+smart_car\wifi_command.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
