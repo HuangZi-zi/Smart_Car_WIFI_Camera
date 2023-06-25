@@ -122,12 +122,12 @@ int main(void)
   /* USER CODE BEGIN WHILE */
 	brake(50);
 	keyscan();
-	
+	SetJointAngle(Servo_Ultrasonic,90);
+	SetJointAngle(Servo_Pan,pan_angle);
+	SetJointAngle(Servo_Pitch,pitch_angle);
 	printf("hello\n");
   while (1)
   {
-		int i;
-		SetJointAngle(Servo_Ultrasonic,90);
 		UltrasonicWave_StartMeasure();
     /* USER CODE END WHILE */
 
@@ -136,9 +136,9 @@ int main(void)
 		//printf("%f\n",UltrasonicWave_Distance);
 		//HAL_Delay(500);
 
-		//command_run(TracingRun(),50);
+		command_run(TracingRun(),70);
 		//receive_command();
-		command_run(receive_command(),30);
+		//command_run(receive_command(),30);
 	}
   /* USER CODE END 3 */
 }
@@ -195,10 +195,10 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 		//每一次计数为1us
 			UltrasonicWave_Distance=(float)__HAL_TIM_GET_COUNTER(&htim2)*17/1000.0;//计算距离，单位为cm
 	} 
-//	if (UltrasonicWave_Distance<=8.0)
-//	{
-//	Error_Handler();
-//	}
+	if (UltrasonicWave_Distance<=8.0)
+	{
+	Error_Handler();
+	}
 }
 
 //串口2中断服务程序，用于处理串口2接收

@@ -10,38 +10,41 @@ char ctrl_comm_last = COMM_BRAKE;	//ÉÏÒ»´ÎµÄÖ¸Áî
 
 char TracingRun(void)
 {
-//Á½²àË«Ïß
-//	//°×°×°× Ö±ÐÐ
-//	if(READ_TRACING_L==WHITE_AREA && READ_TRACING_M==WHITE_AREA && READ_TRACING_R==WHITE_AREA)
+  //Á½²àË«Ïß
+	//°×°×°× Ö±ÐÐ
+	if(READ_TRACING_L==WHITE_AREA && READ_TRACING_M==WHITE_AREA && READ_TRACING_R==WHITE_AREA)
+		ctrl_comm = COMM_FORWARD;
+	//ºÚ°×°× ÓÒ×ª
+	else if (READ_TRACING_L == BLACK_AREA && READ_TRACING_M == WHITE_AREA && READ_TRACING_R == WHITE_AREA)
+		ctrl_comm = COMM_RIGHT;
+	//°×°×ºÚ ×ó×ª
+	else if (READ_TRACING_L == WHITE_AREA && READ_TRACING_M == WHITE_AREA && READ_TRACING_R == BLACK_AREA)
+		ctrl_comm = COMM_LEFT;
+	//°×ºÚ°× ºóÍË
+	else if (READ_TRACING_L == WHITE_AREA && READ_TRACING_M == BLACK_AREA && READ_TRACING_R == WHITE_AREA)
+		ctrl_comm = COMM_BACK;
+	else ctrl_comm = COMM_BRAKE;
+	
+////ÖÐ¼äµ¥Ïß
+//	//°×ºÚ°× Ö±ÐÐ
+//	if(READ_TRACING_L==WHITE_AREA && READ_TRACING_M==BLACK_AREA && READ_TRACING_R==WHITE_AREA)
 //		ctrl_comm = COMM_FORWARD;
-//	//ºÚ°×°× ÓÒ×ª
+//	//ºÚ°×°× ×ó×ª
 //	else if (READ_TRACING_L == BLACK_AREA && READ_TRACING_M == WHITE_AREA && READ_TRACING_R == WHITE_AREA)
-//		ctrl_comm = COMM_RIGHT;
-//	//°×°×ºÚ ×ó×ª
+//		ctrl_comm = COMM_LEFT;
+//	//°×°×ºÚ ÓÒ×ª
 //	else if (READ_TRACING_L == WHITE_AREA && READ_TRACING_M == WHITE_AREA & READ_TRACING_L == BLACK_AREA)
+//		ctrl_comm = COMM_RIGHT;
+//	//°×°×°× ºóÍË
+//	else if (READ_TRACING_L == WHITE_AREA && READ_TRACING_M == WHITE_AREA & READ_TRACING_L == WHITE_AREA)
+//		ctrl_comm = COMM_BACK;
+//	//°×ºÚºÚ ÓÒ×ª
+//	else if (READ_TRACING_L == WHITE_AREA && READ_TRACING_M == BLACK_AREA & READ_TRACING_L == BLACK_AREA)
+//		ctrl_comm = COMM_RIGHT;
+//	//ºÚºÚ°× ×ó×ª
+//	else if (READ_TRACING_L == BLACK_AREA && READ_TRACING_M == BLACK_AREA & READ_TRACING_L == WHITE_AREA)
 //		ctrl_comm = COMM_LEFT;
 //	else ctrl_comm = COMM_BRAKE;
-	
-//ÖÐ¼äµ¥Ïß
-	//°×ºÚ°× Ö±ÐÐ
-	if(READ_TRACING_L==WHITE_AREA && READ_TRACING_M==BLACK_AREA && READ_TRACING_R==WHITE_AREA)
-		ctrl_comm = COMM_FORWARD;
-	//ºÚ°×°× ×ó×ª
-	else if (READ_TRACING_L == BLACK_AREA && READ_TRACING_M == WHITE_AREA && READ_TRACING_R == WHITE_AREA)
-		ctrl_comm = COMM_LEFT;
-	//°×°×ºÚ ÓÒ×ª
-	else if (READ_TRACING_L == WHITE_AREA && READ_TRACING_M == WHITE_AREA & READ_TRACING_L == BLACK_AREA)
-		ctrl_comm = COMM_RIGHT;
-	//°×°×°× ºóÍË
-	else if (READ_TRACING_L == WHITE_AREA && READ_TRACING_M == WHITE_AREA & READ_TRACING_L == WHITE_AREA)
-		ctrl_comm = COMM_BACK;
-	//°×ºÚºÚ ÓÒ×ª
-	else if (READ_TRACING_L == WHITE_AREA && READ_TRACING_M == BLACK_AREA & READ_TRACING_L == BLACK_AREA)
-		ctrl_comm = COMM_RIGHT;
-	//ºÚºÚ°× ×ó×ª
-	else if (READ_TRACING_L == BLACK_AREA && READ_TRACING_M == BLACK_AREA & READ_TRACING_L == WHITE_AREA)
-		ctrl_comm = COMM_LEFT;
-	else ctrl_comm = COMM_BRAKE;
 	if(ctrl_comm_last != ctrl_comm)
 	{
 			ctrl_comm_last = ctrl_comm;

@@ -131,9 +131,9 @@ void command_run(char ctrl_comm, int speed)
 		switch(ctrl_comm)
 		{
 			case COMM_FORWARD:    forward(speed,10);break;
-			case COMM_BACK:  			back(speed,10);break;
-			case COMM_LEFT:  			turn_left(speed,10);break;
-			case COMM_RIGHT: 			turn_right(speed,10);break;
+			case COMM_BACK:  			back(speed,30);break;
+			case COMM_LEFT:  			turn_left(speed+20,20);break;
+			case COMM_RIGHT: 			turn_right(speed+20,20);break;
 			case COMM_BRAKE:  		brake(10);break;
 			case 'L':							pan_left();break;
 			case 'R':							pan_right();break;
