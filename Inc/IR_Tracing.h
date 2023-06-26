@@ -16,7 +16,7 @@
 #define WHITE_AREA 			0
 
 //指令定义
-#define COMM_BRAKE  		'I'//停止
+#define COMM_BRAKE  		'F'//停止
 #define COMM_FORWARD    'A'//前进
 #define COMM_BACK  			'B'//后退
 #define COMM_LEFT  			'C'//左转
