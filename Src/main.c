@@ -122,7 +122,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
 	brake(50);
 	keyscan();
-	SetJointAngle(Servo_Ultrasonic,90);
+	SetJointAngle(Servo_Ultrasonic,93);
 	SetJointAngle(Servo_Pan,pan_angle);
 	SetJointAngle(Servo_Pitch,pitch_angle);
 	printf("hello\n");
@@ -136,9 +136,9 @@ int main(void)
 		//printf("%f\n",UltrasonicWave_Distance);
 		//HAL_Delay(500);
 
-		//command_run(TracingRun(),70);
+		command_run(TracingRun(),70);
 		//receive_command();
-		command_run(receive_command(),70);
+		//command_run(receive_command(),70);
 	}
   /* USER CODE END 3 */
 }
